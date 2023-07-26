@@ -1,4 +1,4 @@
 (executable
  (name stackl)
  (modes byte exe)
- (libraries str vm parser))
+ (libraries str vm parser graphics drawer))

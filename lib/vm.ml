@@ -9,7 +9,10 @@ exception VMError of string
 let sprint_vars vars =
   vars |> StringMap.bindings
   |> List.map (fun (s, v) ->
-         match v with Value v -> sprintf "%s = %i" s v | _ -> sprintf "%s" s)
+         match v with
+         | Value v -> sprintf "%s = %i" s v
+         | FloatValue f -> sprintf "%s = %f" s f
+         | _ -> sprintf "%s" s)
   |> String.concat ", " |> sprintf "[%s]"
 
 let sprint_vm vm =

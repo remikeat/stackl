@@ -12,3 +12,8 @@
  (name vm)
  (modules vm)
  (libraries tree str))
+
+(library
+ (name drawer)
+ (modules drawer)
+ (libraries graphics))

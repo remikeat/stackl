@@ -4,6 +4,7 @@ type operator = Add | Sub | Mul | Div | Lt
 
 type tree =
   | Value of int
+  | FloatValue of float
   | Symbol of string
   | SymbolDecl of string
   | Operator of operator
@@ -17,6 +18,7 @@ let rec sprint_tree tree_lst =
   |> List.map (fun v ->
          match v with
          | Value v -> sprintf "Value %i" v
+         | FloatValue v -> sprintf "FloatValue %f" v
          | If -> sprintf "if"
          | Def -> sprintf "def"
          | Operator op -> (
@@ -24,7 +26,7 @@ let rec sprint_tree tree_lst =
              | Add -> sprintf "+"
              | Sub -> sprintf "-"
              | Mul -> sprintf "*"
-             | Div -> sprintf "/"
+             | Div -> sprintf "div"
              | Lt -> sprintf "<")
          | Block b -> sprintf "Block [%s]" (sprint_tree b)
          | Symbol s -> sprintf "Symbol %s" s
