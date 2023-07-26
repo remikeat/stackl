@@ -3,6 +3,14 @@ open Tree
 
 exception ParserError of string
 
+let rec token_list l input =
+  match l with
+  | [] -> None
+  | hd :: tl -> (
+      match token hd input with
+      | Some _ as res -> res
+      | None -> token_list tl input)
+
 let identifier = letter <~> many (alpha_num <|> exactly '_') => implode
 let block x = lexeme (between (token "{") (token "}") x)
 
@@ -30,22 +38,25 @@ let if_token = token "if" >> return If
 let def = token "def" >> return Def
 
 let native_fun =
-  token "exch"
-  => (fun x -> NativeFunc x)
-  <|> (token "dup" => fun x -> NativeFunc x)
-  <|> (token "puts" => fun x -> NativeFunc x)
-  <|> (token "pi" => fun x -> NativeFunc x)
-  <|> (token "save" => fun x -> NativeFunc x)
-  <|> (token "restore" => fun x -> NativeFunc x)
-  <|> (token "translate" => fun x -> NativeFunc x)
-  <|> (token "rotate" => fun x -> NativeFunc x)
-  <|> (token "begin_path" => fun x -> NativeFunc x)
-  <|> (token "move_to" => fun x -> NativeFunc x)
-  <|> (token "line_to" => fun x -> NativeFunc x)
-  <|> (token "stroke" => fun x -> NativeFunc x)
+  token_list
+    [
+      "exch";
+      "dup";
+      "puts";
+      "pi";
+      "save";
+      "restore";
+      "translate";
+      "rotate";
+      "begin_path";
+      "move_to";
+      "line_to";
+      "stroke";
+    ]
+  => fun x -> NativeFunc x
 
 let rec tok input =
-  many1
+  many
     (block tok
     => (fun x -> Block x)
     <|> if_token <|> def <|> native_fun <|> symbol_decl <|> float_val
