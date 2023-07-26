@@ -1,0 +1,4 @@
+(executable
+ (name stackl)
+ (modes byte exe)
+ (libraries str vm parser))

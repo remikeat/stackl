@@ -1,0 +1,14 @@
+(library
+ (name tree)
+ (modules tree)
+ (libraries str))
+
+(library
+ (name parser)
+ (modules parser)
+ (libraries tree opal))
+
+(library
+ (name vm)
+ (modules vm)
+ (libraries tree str))
