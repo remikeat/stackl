@@ -2,6 +2,8 @@
 
 This is a stack machine based language
 
+It is the ocaml version of https://github.com/msakuta/rustack
+
 # Results
 
 ![koch](https://github.com/remikeat/stackl/blob/master/misc/koch.png?raw=true)
