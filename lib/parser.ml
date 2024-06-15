@@ -43,6 +43,7 @@ let native_fun =
       "exch";
       "dup";
       "puts";
+      "load";
       "pi";
       "save";
       "restore";

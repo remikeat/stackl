@@ -33,7 +33,7 @@ let process_binary_op op vm =
         | Sub -> Value (v1 - v2)
         | Mul -> Value (v1 * v2)
         | Div -> Value (v1 / v2)
-        | Lt -> if v1 < v2 then (Value 1) else (Value 0)
+        | Lt -> if v1 < v2 then Value 1 else Value 0
       in
       Vm.push value vm
   | _, _ -> (
@@ -82,6 +82,15 @@ let process_native_fun f vm =
       | _ ->
           vm |> Vm.sprint_vm |> prerr_endline;
           Error "Not a value" |> raise)
+  | "load" -> (
+      let v, vm = Vm.pop vm in
+      match v with
+      | SymbolDecl s ->
+          let v = Vm.get_var s vm in
+          Vm.push v vm
+      | _ ->
+          vm |> Vm.sprint_vm |> prerr_endline;
+          Error "Not a symbol decl" |> raise)
   | "pi" -> Vm.push (FloatValue Float.pi) vm
   | "save" ->
       drawer := save !drawer;
@@ -115,11 +124,13 @@ let process_native_fun f vm =
       drawer := stroke !drawer;
       vm
   | "set_fill_style" ->
-    let b, vm = Vm.pop vm in
-    let g, vm = Vm.pop vm in
-    let r, vm = Vm.pop vm in
-    drawer := set_fill_style (int_of_value r) (int_of_value g) (int_of_value b) !drawer;
-    vm
+      let b, vm = Vm.pop vm in
+      let g, vm = Vm.pop vm in
+      let r, vm = Vm.pop vm in
+      drawer :=
+        set_fill_style (int_of_value r) (int_of_value g) (int_of_value b)
+          !drawer;
+      vm
   | _ ->
       vm |> Vm.sprint_vm |> prerr_endline;
       Error (sprintf "Unknown function %s" f) |> raise
