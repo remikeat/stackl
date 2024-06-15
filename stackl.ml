@@ -29,13 +29,13 @@ let process_binary_op op vm =
   | Value v1, Value v2 ->
       let value =
         match op with
-        | Add -> v1 + v2
-        | Sub -> v1 - v2
-        | Mul -> v1 * v2
-        | Div -> v1 / v2
-        | Lt -> if v1 < v2 then 1 else 0
+        | Add -> Value (v1 + v2)
+        | Sub -> Value (v1 - v2)
+        | Mul -> Value (v1 * v2)
+        | Div -> Value (v1 / v2)
+        | Lt -> if v1 < v2 then (Value 1) else (Value 0)
       in
-      Vm.push (Value value) vm
+      Vm.push value vm
   | _, _ -> (
       match (is_value op1, is_value op2) with
       | true, true -> (
@@ -114,6 +114,12 @@ let process_native_fun f vm =
   | "stroke" ->
       drawer := stroke !drawer;
       vm
+  | "set_fill_style" ->
+    let b, vm = Vm.pop vm in
+    let g, vm = Vm.pop vm in
+    let r, vm = Vm.pop vm in
+    drawer := set_fill_style (int_of_value r) (int_of_value g) (int_of_value b) !drawer;
+    vm
   | _ ->
       vm |> Vm.sprint_vm |> prerr_endline;
       Error (sprintf "Unknown function %s" f) |> raise

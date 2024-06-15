@@ -52,6 +52,7 @@ let native_fun =
       "move_to";
       "line_to";
       "stroke";
+      "set_fill_style";
     ]
   => fun x -> NativeFunc x
 

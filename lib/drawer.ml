@@ -6,6 +6,7 @@ type drawer = {
   cur_pos : float * float;
   stack : (float * float) list;
   saved : drawer list;
+  fill : bool;
 }
 
 exception DrawerError of string
@@ -25,7 +26,13 @@ let sprintf_drawer drawer =
     (drawer.saved |> List.length)
 
 let init_drawer =
-  { origin_pos = (0., 0., 0.); cur_pos = (0., 0.); stack = []; saved = [] }
+  {
+    origin_pos = (0., 0., 0.);
+    cur_pos = (0., 0.);
+    stack = [];
+    saved = [];
+    fill = false;
+  }
 
 let transform origin_pos pt =
   let ox, oy, origin_r = origin_pos in
@@ -46,17 +53,25 @@ let rotate r drawer =
 let move_to x y drawer = { drawer with cur_pos = (x, y) }
 
 let line_to x y drawer =
-  {
+  let drawer = {
     drawer with
     stack =
       transform drawer.origin_pos (x, y)
       :: transform drawer.origin_pos drawer.cur_pos
       :: drawer.stack;
-  }
+  } in
+  move_to x y drawer
 
 let begin_path drawer = { drawer with stack = [] }
 
 let stroke drawer =
+  let drawer =
+    if drawer.fill then
+      drawer.stack
+      |> List.map (fun (x, y) -> (int_of_float x, int_of_float y))
+      |> Array.of_list |> fill_poly;
+    { drawer with fill = false }
+  in
   let rec process stack =
     match stack with
     | [] -> { drawer with stack = [] }
@@ -69,6 +84,10 @@ let stroke drawer =
     | _ -> DrawerError "Unexpected error" |> raise
   in
   process drawer.stack
+
+let set_fill_style r g b drawer =
+  let () = set_color (rgb r g b) in
+  { drawer with fill = true }
 
 let save drawer = { drawer with saved = drawer :: drawer.saved }
 

@@ -1,25 +1,16 @@
+/color { 0 0 0 } def
+/scale 10 def
+
 /min {
     /a exch def
     /b exch def
-    { a b < } {a} {b} if
+    { a b < } { a } { b } if
 } def
 
 /max {
     /a exch def
     /b exch def
-    { a b < } {b} {a} if
-} def
-
-/line {
-    /x1 exch def
-    /y1 exch def
-    /x2 exch def
-    /y2 exch def
-
-    begin_path
-    x1 y1 move_to
-    x2 y2 line_to
-    stroke
+    { a b < } { b } { a } if
 } def
 
 /rect {
@@ -27,36 +18,39 @@
     /y1 exch def
     /x2 exch def
     /y2 exch def
-    /mx {x1 x2 min} def
-    /Mx {x1 x2 max} def
-    /my {y1 y2 min} def
-    /My {y1 y2 max} def
+    /mx { x1 x2 min } def
+    /Mx { x1 x2 max } def
+    /my { y1 y2 min } def
+    /My { y1 y2 max } def
 
-    mx my mx My line
-    mx My Mx My line
-    Mx My Mx my line
-    Mx my mx my line
+    begin_path
+    my mx move_to
+    my Mx line_to
+    My Mx line_to
+    My mx line_to
+    my mx line_to
+    stroke
 } def
 
-/fx1 -10 def
-/fx2 -40 def
-/fy1 {/n exch def 15 3 div 175 + 10 n * -} def
-/fy2 {/n exch def -15 3 div 175 + 10 n * -} def
+/fx1 { -1 scale * } def
+/fx2 { -4 scale * } def
+/fy1 { /n exch def 1.5 3. div 17.5 + n - scale * } def
+/fy2 { /n exch def -1.5 3. div 17.5 + n - scale * } def
 
-/gx1 -20 def
-/gx2 -40 def
-/gy1 {/n exch def 10 4 div 10 n * +} def
-/gy2 {/n exch def -10 4 div 10 n * +} def
+/gx1 { -2 scale * } def
+/gx2 { -4 scale * } def
+/gy1 { /n exch def 1. 4. div n + scale * } def
+/gy2 { /n exch def -1. 4. div n + scale * } def
 
-/px1 {/m exch def 5 10 m * 2 div +} def
-/px2 {/m exch def -5 10 m * 2 div +} def
-/py1 {/n exch def 5 10 n * 2 div +} def
-/py2 {/n exch def -5 10 n * 2 div +} def
+/px1 { /m exch def 0.5 m 2. div + scale * } def
+/px2 { /m exch def -0.5 m 2. div + scale * } def
+/py1 { /n exch def 0.5 n 2. div + scale * } def
+/py2 { /n exch def -0.5 n 2. div + scale * } def
 
-/qx1 {/m exch def 40 10 m * 2 div +} def
-/qx2 {/m exch def -40 10 m * 2 div +} def
-/qy1 {/n exch def 40 8 div 10 n * 2 div +} def
-/qy2 {/n exch def -40 8 div 10 n * 2 div +} def
+/qx1 { /m exch def 4. m 2. div + scale * } def
+/qx2 { /m exch def -4. m 2. div + scale * } def
+/qy1 { /n exch def 4. 8. div n 2. div + scale * } def
+/qy2 { /n exch def -4. 8. div n 2. div + scale * } def
 
 /white {
     /level exch def
@@ -65,19 +59,20 @@
         fx1 level fy1 fx2 level fy2 rect
         level 1 + white
     }
-    {}
+    { }
     if
 } def
 
 /black {
     /nb_elem exch def
     /n exch def
+    color set_fill_style
     gx1 n gy1 gx2 n gy2 rect
     { 1 nb_elem < }
     {
         nb_elem 1 - black
     }
-    {}
+    { }
     if
 } def
 
@@ -85,12 +80,13 @@
     /nb_elem exch def
     /n exch def
     /m exch def
+    color set_fill_style
     m px1 n py1 m px2 n py2 rect
     { 1 nb_elem < }
     {
         n nb_elem 1 - notes
     }
-    {}
+    { }
     if
 } def
 
@@ -101,7 +97,9 @@
 37 41 45 3 3 notes
 /m 24 def
 /n 1 def
+color set_fill_style
 m qx1 n qy1 m qx2 n qy2 rect
 /m 56 def
 /n -1 def
+color set_fill_style
 m qx1 n qy1 m qx2 n qy2 rect
