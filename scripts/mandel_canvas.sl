@@ -1,17 +1,3 @@
-/for {
-    /proc exch def
-    /end exch def
-    /start exch def
-
-    { start end < }
-    {
-        proc
-        start 1 + end /proc load for
-    }
-    { }
-    if
-} def
-
 /rectangle {
     /h exch def
     /w exch def
@@ -38,34 +24,37 @@
 } def
 
 /mandelconverge {
-    /cimag exch def
-    /creal exch def
+    /max_iter exch def
+    /cy exch def
+    /cx exch def
 
-    0 0 0
-    0 500 {
-        /iters exch def
-        /imag exch def
-        /real exch def
-        /r2 real real * def
-        /i2 imag imag * def
-        { 4 r2 i2 + < }
-        { }
+    /mandeliter {
+        /y exch def
+        /x exch def
+        /i exch def
+        /x2 x x * def
+        /y2 y y * def
+        { i max_iter < }
         {
-            /iters iters 1 + def
-            /x r2 i2 - creal + def
-            /y 2 real * imag * cimag + def
+            { 4 x2 y2 + < }
+            {
+                i
+            }
+            {
+                /new_x x2 y2 - cx + def
+                /new_y 2 x * y * cy + def
+                i 1 + new_x new_y mandeliter
+            } if
+        }
+        {
+            i
         } if
-        x
-        y
-        iters
-    } for
-    /iters exch def
-    /imag exch def
-    /real exch def
-    iters
+    } def
+    0 0 0 mandeliter
 } def
 
 /mandel {
+    /max_iter exch def
     /res exch def
     /y_nb_steps exch def
     /x_nb_steps exch def
@@ -74,22 +63,32 @@
     /y_start exch def
     /x_start exch def
 
-    0
-    0 y_nb_steps {
+    /loop_y {
         /iy exch def
-        /y iy y_step * y_start + def
-        0
-        0 x_nb_steps {
-            /ix exch def
-            /x ix x_step * x_start + def
-            /d x y mandelconverge def
-            d ix iy res printdensity
-            ix 1 +
-        } for
-        /ix exch def
-        iy 1 +
-    } for
-    /iy exch def
+        { iy y_nb_steps < }
+        {
+            /y iy y_step * y_start + def
+            /loop_x {
+                /ix exch def
+                { ix x_nb_steps < }
+                {
+                    /x ix x_step * x_start + def
+                    /d x y max_iter mandelconverge def
+                    d ix iy res printdensity
+                    ix 1 + loop_x
+                }
+                {
+
+                } if
+            } def
+            0 loop_x
+            iy 1 + loop_y
+        }
+        {
+
+        } if
+    } def
+    0 loop_y
 } def
 
--2.0 -2.0 0.01 0.01 400 400 2 mandel
+-2.0 -2.0 0.01 0.01 400 400 2 500 mandel
