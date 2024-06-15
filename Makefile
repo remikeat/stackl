@@ -1,5 +1,5 @@
 stackl.exe:
-	dune build $@
+	dune build --profile release $@
 
 clean:
 	@rm -rf _build

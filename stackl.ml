@@ -184,7 +184,7 @@ let read_lines () =
   in
   read_lines' [] |> String.concat "\n"
 
-let () = open_graph " 800x600"
+let () = open_graph " 1024x800"
 let input = read_lines ()
 let tree = Parser.parse input
 
