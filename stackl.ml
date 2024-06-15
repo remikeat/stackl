@@ -62,6 +62,12 @@ let process_def vm =
       Error "Wrong def usage" |> raise
 
 let process_native_fun f vm =
+  (drawer :=
+     match f with
+     | "save" | "restore" | "translate" | "rotate" | "begin_path" | "move_to"
+     | "line_to" | "stroke" | "set_fill_style" ->
+         open_windows_if_needed !drawer
+     | _ -> !drawer);
   match f with
   | "dup" ->
       let v, vm = Vm.pop vm in
@@ -74,10 +80,10 @@ let process_native_fun f vm =
       let v, vm = Vm.pop vm in
       match v with
       | Value v ->
-          printf "PUTS: %i\n" v;
+          printf "PUTS: %i\n%!" v;
           vm
       | FloatValue f ->
-          printf "PUTS: %f\n" f;
+          printf "PUTS: %f\n%!" f;
           vm
       | _ ->
           vm |> Vm.sprint_vm |> prerr_endline;
@@ -184,7 +190,6 @@ let read_lines () =
   in
   read_lines' [] |> String.concat "\n"
 
-let () = open_graph " 1024x800"
 let input = read_lines ()
 let tree = Parser.parse input
 
@@ -197,4 +202,4 @@ let rec interactive () =
   print_newline ();
   interactive ()
 
-let () = interactive ()
+let () = if !drawer.window_opened then interactive ()

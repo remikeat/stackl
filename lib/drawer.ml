@@ -7,6 +7,7 @@ type drawer = {
   stack : (float * float) list;
   saved : drawer list;
   fill : bool;
+  window_opened : bool;
 }
 
 exception DrawerError of string
@@ -32,7 +33,12 @@ let init_drawer =
     stack = [];
     saved = [];
     fill = false;
+    window_opened = false;
   }
+
+let open_windows_if_needed drawer =
+  let () = if not drawer.window_opened then open_graph " 1024x800" in
+  { drawer with window_opened = true }
 
 let transform origin_pos pt =
   let ox, oy, origin_r = origin_pos in
@@ -53,13 +59,15 @@ let rotate r drawer =
 let move_to x y drawer = { drawer with cur_pos = (x, y) }
 
 let line_to x y drawer =
-  let drawer = {
-    drawer with
-    stack =
-      transform drawer.origin_pos (x, y)
-      :: transform drawer.origin_pos drawer.cur_pos
-      :: drawer.stack;
-  } in
+  let drawer =
+    {
+      drawer with
+      stack =
+        transform drawer.origin_pos (x, y)
+        :: transform drawer.origin_pos drawer.cur_pos
+        :: drawer.stack;
+    }
+  in
   move_to x y drawer
 
 let begin_path drawer = { drawer with stack = [] }
