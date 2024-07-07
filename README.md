@@ -57,7 +57,7 @@ make
 # How to run
 
 ```
-cat scripts/koch.sh | ./_build/default/stackl.exe
+cat scripts/koch.sl | ./_build/default/stackl.exe
 ```
 
 # How to quit

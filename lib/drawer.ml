@@ -103,3 +103,9 @@ let restore drawer =
   match drawer.saved with
   | [] -> DrawerError "No saved drawer to restore" |> raise
   | hd :: tl -> { hd with saved = tl }
+
+let rec interactive () =
+  let event = wait_next_event [ Key_pressed ] in
+  if event.key == 'q' then exit 0 else print_char event.key;
+  print_newline ();
+  interactive ()

@@ -17,3 +17,12 @@
  (name drawer)
  (modules drawer)
  (libraries graphics))
+
+(library
+ (name eval)
+ (modules eval)
+ (libraries str tree vm drawer))
+
+(library
+ (name input)
+ (modules input))
