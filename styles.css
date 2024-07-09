@@ -5,6 +5,16 @@ body {
     padding: 1cm;
 }
 
+#samples {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0.5cm;
+    flex-wrap: wrap;
+    row-gap: 0.5cm;
+}
+
 #input {
     width: 100%;
 }
