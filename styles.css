@@ -2,19 +2,37 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 1cm;
+}
+
+#input {
+    width: 100%;
 }
 
 #result {
     display: flex;
     flex-direction: row;
-    column-gap: 1cm;
+    column-gap: 0.5cm;
 }
 
 #process {
+    width: 100%;
     margin: 0.5cm;
     padding: 0.5cm 1cm 0.5cm 1cm;
 }
 
 #canvas {
     border: black 1px solid;
+    width: 100%;
+}
+
+#output {
+    width: 100%;
+}
+
+@media only screen and (width <= 640px) {
+    #result {
+        flex-direction: column;
+        row-gap: 0.5cm;
+    }
 }
