@@ -14,12 +14,13 @@
 } def
 
 /printdensity {
+    /scale exch def
     /res exch def
     /y exch def
     /x exch def
     /d exch def
 
-    0 0.5 d * 0 set_fill_style
+    0 scale d * 0 set_fill_style
     x res * y res * res res rectangle
 } def
 
@@ -74,7 +75,10 @@
                 {
                     /x ix x_step * x_start + def
                     /d x y max_iter mandelconverge def
-                    d ix iy res printdensity
+                    { d max_iter < }
+                    { 0 ix iy res 1 printdensity }
+                    { 255 ix iy res 1 printdensity }
+                    if
                     ix 1 + loop_x
                 }
                 {
@@ -91,4 +95,4 @@
     0 loop_y
 } def
 
--2.0 -2.0 0.01 0.01 400 400 2 250 mandel
+-1.5 -1.0 0.01 0.01 200 200 3 100 mandel
