@@ -16,7 +16,7 @@ module MakeEval (G : Drawer.GraphicsInterface) = struct
 
   let reset () =
     output_string := Some "";
-    drawer := Drawer.init_drawer ()
+    drawer := Drawer.reset ()
 
   let float_of_value v =
     match v with

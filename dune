@@ -5,6 +5,24 @@
  (libraries str vm parser graphics drawer eval input))
 
 (executable
+ (name worker_js)
+ (modules worker_js)
+ (preprocess
+  (pps js_of_ocaml-ppx))
+ (modes js)
+ (libraries
+  str
+  vm
+  parser
+  drawer
+  eval
+  input
+  js_of_ocaml
+  lwt
+  js_of_ocaml-lwt
+  js_of_ocaml-lwt.graphics))
+
+(executable
  (name stackl_js)
  (modules stackl_js)
  (preprocess

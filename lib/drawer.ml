@@ -9,6 +9,7 @@ module type GraphicsInterface = sig
   val set_color : color -> unit
   val fill_poly : (int * int) array -> unit
   val rgb : int -> int -> int -> color
+  val clear_graph : unit -> unit
 end
 
 module MakeDrawer (G : GraphicsInterface) = struct
@@ -114,4 +115,8 @@ module MakeDrawer (G : GraphicsInterface) = struct
     match drawer.saved with
     | [] -> DrawerError "No saved drawer to restore" |> raise
     | hd :: tl -> { hd with saved = tl }
+
+  let reset () =
+    G.clear_graph ();
+    init_drawer ()
 end
