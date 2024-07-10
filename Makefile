@@ -6,4 +6,4 @@ clean:
 	@rm -rf stackl.zip
 
 zip:
-	zip stackl.zip _build/default/stackl_js.bc.js index.html styles.css scripts/*.sl
+	zip stackl.zip _build/default/*.bc.js index.html styles.css scripts/*.sl
