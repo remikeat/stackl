@@ -1,3 +1,11 @@
+(env
+ (_
+  (js_of_ocaml
+   (flags
+    (:standard --enable effects))
+   (build_runtime_flags
+    (:standard --enable effects)))))
+
 (executable
  (name stackl)
  (modules stackl)

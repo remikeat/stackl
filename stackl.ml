@@ -18,5 +18,5 @@ let input = read_lines ()
 let tree = Parser.parse input
 
 (* let () = tree |> sprint_tree |> print_endline *)
-let vm = Eval.eval_list 0 tree Vm.empty
+let _ = Eval.eval_list 0 tree Vm.empty
 let () = if !Eval.drawer.window_opened then interactive ()

@@ -45,6 +45,7 @@ let process event =
   | _ -> raise Not_found
 
 let onload _ =
+  let worker = Worker.create "_build/default/worker_js.bc.js" in
   let document = Html.window##.document in
   let samples = Html.getElementById "samples" in
   let btn = Html.getElementById "process" in
@@ -81,7 +82,6 @@ let onload _ =
             | None -> Js.string ""
             | Some input -> input##.value
           in
-          let worker = Worker.create "_build/default/worker_js.bc.js" in
           worker##.onmessage :=
             Dom.handler (fun event ->
                 process event;
