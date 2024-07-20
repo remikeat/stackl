@@ -10,7 +10,7 @@ module G = struct
   let moveto x y =
     let msg =
       object%js
-        val fun_name = "moveto"
+        val funname = Js.string "moveto"
         val x = x
         val y = y
       end
@@ -20,7 +20,7 @@ module G = struct
   let lineto x y =
     let msg =
       object%js
-        val fun_name = "lineto"
+        val funname = Js.string "lineto"
         val x = x
         val y = y
       end
@@ -30,17 +30,26 @@ module G = struct
   let set_color color =
     let msg =
       object%js
-        val fun_name = "set_color"
+        val funname = Js.string "set_color"
         val color = color
       end
     in
     Worker.post_message msg
 
   let fill_poly coords =
+    let js_coords =
+      coords
+      |> Array.map (fun (x, y) ->
+             object%js
+               val x = x
+               val y = y
+             end)
+      |> Js.array
+    in
     let msg =
       object%js
-        val fun_name = "fill_poly"
-        val coords = coords
+        val funname = Js.string "fill_poly"
+        val coords = js_coords
       end
     in
     Worker.post_message msg
@@ -50,7 +59,7 @@ module G = struct
   let clear_graph () =
     let msg =
       object%js
-        val fun_name = "clear_graph"
+        val funname = Js.string "clear_graph"
       end
     in
     Worker.post_message msg
@@ -59,15 +68,15 @@ end
 module Eval = Eval.MakeEval (G)
 
 let onmessage event =
-  let input = event##.input in
+  let input = Js.to_string event##.input in
   let () = Eval.reset () in
   let tree = Parser.parse input in
   let _ = Eval.eval_list 0 tree Vm.empty in
   let output = Eval.get_output_string () in
   let msg =
     object%js
-      val fun_name = "output"
-      val output = output
+      val funname = Js.string "output"
+      val output = Js.string output
     end
   in
   Worker.post_message msg

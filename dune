@@ -17,7 +17,7 @@
  (modules worker_js)
  (preprocess
   (pps js_of_ocaml-ppx))
- (modes js)
+ (modes byte js)
  (libraries
   str
   vm
@@ -35,7 +35,7 @@
  (modules stackl_js)
  (preprocess
   (pps js_of_ocaml-ppx))
- (modes js)
+ (modes byte js)
  (libraries
   str
   vm

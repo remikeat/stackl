@@ -32,12 +32,15 @@ let samples_files_lst =
 
 let process event =
   let data = Js.Unsafe.coerce event##.data in
-  match data##.fun_name with
+  let convert_coords coords =
+    coords |> Js.to_array |> Array.map (fun obj -> (obj##.x, obj##.y))
+  in
+  match data##.funname with
   | "clear_graph" -> clear_graph ()
   | "moveto" -> moveto data##.x data##.y
   | "lineto" -> lineto data##.x data##.y
   | "set_color" -> set_color data##.color
-  | "fill_poly" -> fill_poly data##.coords
+  | "fill_poly" -> fill_poly (convert_coords data##.coords)
   | "output" -> (
       match !output with
       | None -> ()
