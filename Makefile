@@ -3,6 +3,7 @@ stackl.exe:
 
 wasm:
 	cd _build/default; wasm_of_ocaml worker_js.bc
+	cd _build/default; wasm-opt -O3 --all-features -o worker_js.wasm worker_js.wasm
 
 clean:
 	@rm -rf _build
