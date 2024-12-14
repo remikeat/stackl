@@ -14,4 +14,4 @@ zip:
 	zip stackl.zip _build/default/*.bc.js index.html styles.css scripts/*.sl
 
 wasm_zip:
-	zip stackl_wasm.zip _build/default/*.bc.js _build/default/*.js _build/default/*.wasm index.html styles.css scripts/*.sl
+	zip stackl_wasm.zip _build/default/*.bc.js _build/default/*.js _build/default/*.wasm index.html stackl.jpg styles.css scripts/*.sl

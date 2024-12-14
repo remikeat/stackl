@@ -72,6 +72,7 @@ let onload _ =
          (fun () file ->
            let button = Html.createButton document in
            button##.innerText := Js.string file;
+           button##.className := Js.string "m-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600";
            button##.onclick :=
              Html.handler (fun _ ->
                  let _ = load_text ("scripts/" ^ file) in

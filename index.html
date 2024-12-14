@@ -1,24 +1,154 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Stackl</title>
-    <script src="_build/default/stackl_js.bc.js"></script>
-    <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "n5qncd4t01");
+
+<head>
+  <title>Stackl - A Stack Language in OCaml</title>
+  <meta property="og:title" content="Stackl - A Stack Language in OCaml">
+  <meta property="og:description"
+    content="Explore Stackl, a stack-based language implemented in OCaml and compiled to WebAssembly.">
+  <meta property="og:image" content="https://stackl.remikeat.com/stackl.jpg">
+  <meta property="og:url" content="https://stackl.remikeat.com/">
+  <meta property="og:type" content="website">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="_build/default/stackl_js.bc.js"></script>
+  <script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "n5qncd4t01");
   </script>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <div id="samples"></div>
-    <textarea id="input" cols="160" rows="20"></textarea>
-    <button id="process">Process</button>
-    <div id="result">
-      <canvas id="canvas" width="800" height="600"></canvas>
-      <textarea id="output" cols="40" rows="20"></textarea>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+  <div class="flex justify-center items-center min-h-screen">
+    <div class="max-w-4xl w-full p-4">
+      <header class="text-center mb-8">
+        <h1 class="text-4xl font-bold">Welcome to Stackl</h1>
+        <p class="text-lg mt-2">A stack-based language implemented in OCaml and compiled to WebAssembly</p>
+      </header>
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold">About Stackl</h2>
+        <p class="mt-2">
+          Stackl is a stack-based programming language designed to be simple yet powerful. It is implemented in OCaml
+          and
+          compiled to WebAssembly, allowing it to run efficiently in web environments.
+        </p>
+      </section>
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold">Available Functions</h2>
+        <table class="table-auto w-full mt-4">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="px-4 py-2">Function</th>
+              <th class="px-4 py-2">Description</th>
+              <th class="px-4 py-2">Arguments</th>
+              <th class="px-4 py-2">Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-4 py-2"><strong>dup</strong></td>
+              <td class="border px-4 py-2">Duplicate the top value on the stack.</td>
+              <td class="border px-4 py-2">None</td>
+              <td class="border px-4 py-2">`3 dup`</td>
+            </tr>
+            <tr class="bg-gray-100">
+              <td class="border px-4 py-2"><strong>exch</strong></td>
+              <td class="border px-4 py-2">Exchange the top two values on the stack.</td>
+              <td class="border px-4 py-2">None</td>
+              <td class="border px-4 py-2">`3 4 exch`</td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-2"><strong>puts</strong></td>
+              <td class="border px-4 py-2">Print the top value on the stack.</td>
+              <td class="border px-4 py-2">None</td>
+              <td class="border px-4 py-2">`3 puts`</td>
+            </tr>
+            <tr class="bg-gray-100">
+              <td class="border px-4 py-2"><strong>load</strong></td>
+              <td class="border px-4 py-2">Load a variable from the environment.</td>
+              <td class="border px-4 py-2">Symbol</td>
+              <td class="border px-4 py-2">`x load`</td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-2"><strong>pi</strong></td>
+              <td class="border px-4 py-2">Push the value of pi onto the stack.</td>
+              <td class="border px-4 py-2">None</td>
+              <td class="border px-4 py-2">`pi`</td>
+            </tr>
+            <tr class="bg-gray-100">
+              <td class="border px-4 py-2"><strong>save</strong></td>
+              <td class="border px-4 py-2">Save the current drawing state.</td>
+              <td class="border px-4 py-2">None</td>
+              <td class="border px-4 py-2">`save`</td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-2"><strong>restore</strong></td>
+              <td class="border px-4 py-2">Restore the last saved drawing state.</td>
+              <td class="border px-4 py-2">None</td>
+              <td class="border px-4 py-2">`restore`</td>
+            </tr>
+            <tr class="bg-gray-100">
+              <td class="border px-4 py-2"><strong>translate</strong></td>
+              <td class="border px-4 py-2">Translate the drawing context.</td>
+              <td class="border px-4 py-2">x, y</td>
+              <td class="border px-4 py-2">`10 20 translate`</td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-2"><strong>rotate</strong></td>
+              <td class="border px-4 py-2">Rotate the drawing context.</td>
+              <td class="border px-4 py-2">angle</td>
+              <td class="border px-4 py-2">`45 rotate`</td>
+            </tr>
+            <tr class="bg-gray-100">
+              <td class="border px-4 py-2"><strong>begin_path</strong></td>
+              <td class="border px-4 py-2">Begin a new path for drawing.</td>
+              <td class="border px-4 py-2">None</td>
+              <td class="border px-4 py-2">`begin_path`</td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-2"><strong>move_to</strong></td>
+              <td class="border px-4 py-2">Move the drawing cursor to a new position.</td>
+              <td class="border px-4 py-2">x, y</td>
+              <td class="border px-4 py-2">`100 150 move_to`</td>
+            </tr>
+            <tr class="bg-gray-100">
+              <td class="border px-4 py-2"><strong>line_to</strong></td>
+              <td class="border px-4 py-2">Draw a line to a new position.</td>
+              <td class="border px-4 py-2">x, y</td>
+              <td class="border px-4 py-2">`200 250 line_to`</td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-2"><strong>stroke</strong></td>
+              <td class="border px-4 py-2">Stroke the current path.</td>
+              <td class="border px-4 py-2">None</td>
+              <td class="border px-4 py-2">`stroke`</td>
+            </tr>
+            <tr class="bg-gray-100">
+              <td class="border px-4 py-2"><strong>set_fill_style</strong></td>
+              <td class="border px-4 py-2">Set the fill style for drawing.</td>
+              <td class="border px-4 py-2">r, g, b</td>
+              <td class="border px-4 py-2">`255 0 0 set_fill_style`</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h2 class="text-2xl font-semibold">Try it Out</h2>
+        <div id="samples" class="mt-4"></div>
+        <div class="mt-4">
+          <textarea id="input" class="w-full p-2 border rounded" cols="160" rows="10"
+            placeholder="Enter your Stackl code here..."></textarea>
+          <button id="process" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">Process</button>
+        </div>
+        <div id="result" class="mt-4">
+          <canvas id="canvas" class="border" width="800" height="600"></canvas>
+          <textarea id="output" class="w-full p-2 border rounded mt-2" cols="40" rows="10" readonly></textarea>
+        </div>
+      </section>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
