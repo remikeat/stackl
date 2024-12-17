@@ -51,88 +51,185 @@
               <td class="border px-4 py-2"><strong>dup</strong></td>
               <td class="border px-4 py-2">Duplicate the top value on the stack.</td>
               <td class="border px-4 py-2">None</td>
-              <td class="border px-4 py-2">`3 dup`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">3 dup</code></td>
             </tr>
             <tr class="bg-gray-100">
               <td class="border px-4 py-2"><strong>exch</strong></td>
               <td class="border px-4 py-2">Exchange the top two values on the stack.</td>
               <td class="border px-4 py-2">None</td>
-              <td class="border px-4 py-2">`3 4 exch`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">3 4 exch</code></td>
             </tr>
             <tr>
               <td class="border px-4 py-2"><strong>puts</strong></td>
               <td class="border px-4 py-2">Print the top value on the stack.</td>
               <td class="border px-4 py-2">None</td>
-              <td class="border px-4 py-2">`3 puts`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">3 puts</code></td>
             </tr>
             <tr class="bg-gray-100">
               <td class="border px-4 py-2"><strong>load</strong></td>
               <td class="border px-4 py-2">Load a variable from the environment.</td>
               <td class="border px-4 py-2">Symbol</td>
-              <td class="border px-4 py-2">`x load`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">x load</code></td>
             </tr>
             <tr>
               <td class="border px-4 py-2"><strong>pi</strong></td>
               <td class="border px-4 py-2">Push the value of pi onto the stack.</td>
               <td class="border px-4 py-2">None</td>
-              <td class="border px-4 py-2">`pi`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">pi</code></td>
             </tr>
             <tr class="bg-gray-100">
               <td class="border px-4 py-2"><strong>save</strong></td>
               <td class="border px-4 py-2">Save the current drawing state.</td>
               <td class="border px-4 py-2">None</td>
-              <td class="border px-4 py-2">`save`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">save</code></td>
             </tr>
             <tr>
               <td class="border px-4 py-2"><strong>restore</strong></td>
               <td class="border px-4 py-2">Restore the last saved drawing state.</td>
               <td class="border px-4 py-2">None</td>
-              <td class="border px-4 py-2">`restore`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">restore</code></td>
             </tr>
             <tr class="bg-gray-100">
               <td class="border px-4 py-2"><strong>translate</strong></td>
               <td class="border px-4 py-2">Translate the drawing context.</td>
               <td class="border px-4 py-2">x, y</td>
-              <td class="border px-4 py-2">`10 20 translate`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">10 20 translate</code></td>
             </tr>
             <tr>
               <td class="border px-4 py-2"><strong>rotate</strong></td>
               <td class="border px-4 py-2">Rotate the drawing context.</td>
               <td class="border px-4 py-2">angle</td>
-              <td class="border px-4 py-2">`45 rotate`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">45 rotate</code></td>
             </tr>
             <tr class="bg-gray-100">
               <td class="border px-4 py-2"><strong>begin_path</strong></td>
               <td class="border px-4 py-2">Begin a new path for drawing.</td>
               <td class="border px-4 py-2">None</td>
-              <td class="border px-4 py-2">`begin_path`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">begin_path</code></td>
             </tr>
             <tr>
               <td class="border px-4 py-2"><strong>move_to</strong></td>
               <td class="border px-4 py-2">Move the drawing cursor to a new position.</td>
               <td class="border px-4 py-2">x, y</td>
-              <td class="border px-4 py-2">`100 150 move_to`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">100 150 move_to</code></td>
             </tr>
             <tr class="bg-gray-100">
               <td class="border px-4 py-2"><strong>line_to</strong></td>
               <td class="border px-4 py-2">Draw a line to a new position.</td>
               <td class="border px-4 py-2">x, y</td>
-              <td class="border px-4 py-2">`200 250 line_to`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">200 250 line_to</code></td>
             </tr>
             <tr>
               <td class="border px-4 py-2"><strong>stroke</strong></td>
               <td class="border px-4 py-2">Stroke the current path.</td>
               <td class="border px-4 py-2">None</td>
-              <td class="border px-4 py-2">`stroke`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">stroke</code></td>
             </tr>
             <tr class="bg-gray-100">
               <td class="border px-4 py-2"><strong>set_fill_style</strong></td>
               <td class="border px-4 py-2">Set the fill style for drawing.</td>
               <td class="border px-4 py-2">r, g, b</td>
-              <td class="border px-4 py-2">`255 0 0 set_fill_style`</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">255 0 0 set_fill_style</code></td>
             </tr>
           </tbody>
         </table>
+      </section>
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold">Arithmetic Operations</h2>
+        <p class="mt-2">
+          Stackl supports basic arithmetic operations such as addition, subtraction, multiplication, and division.
+        </p>
+        <table class="table-auto w-full mt-4">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="px-4 py-2">Operation</th>
+              <th class="px-4 py-2">Description</th>
+              <th class="px-4 py-2">Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-4 py-2"><strong>Addition (+)</strong></td>
+              <td class="border px-4 py-2">Adds the top two values on the stack.</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">3 4 +</code> results in <code
+                  class="bg-gray-100 p-1 rounded">7</code></td>
+            </tr>
+            <tr class="bg-gray-100">
+              <td class="border px-4 py-2"><strong>Subtraction (-)</strong></td>
+              <td class="border px-4 py-2">Subtracts the top value from the second top value on the stack.</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">10 4 -</code> results in <code
+                  class="bg-gray-100 p-1 rounded">6</code></td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-2"><strong>Multiplication (*)</strong></td>
+              <td class="border px-4 py-2">Multiplies the top two values on the stack.</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">3 4 *</code> results in <code
+                  class="bg-gray-100 p-1 rounded">12</code></td>
+            </tr>
+            <tr class="bg-gray-100">
+              <td class="border px-4 py-2"><strong>Division (div)</strong></td>
+              <td class="border px-4 py-2">Divides the second top value by the top value on the stack.</td>
+              <td class="border px-4 py-2"><code class="bg-gray-100 p-1 rounded">12 4 div</code> results in <code
+                  class="bg-gray-100 p-1 rounded">3</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold">Conditional Statements</h2>
+        <p class="mt-2">
+          Stackl supports conditional execution using the <code class="bg-gray-100 p-1 rounded">if</code> statement.
+        </p>
+        <p class="mt-2">
+          Example: <code class="bg-gray-100 p-1 rounded">{ 1  2 < } { 10 puts } { 20 puts } if</code> will print <code
+            class="bg-gray-100 p-1 rounded">10</code> if the condition <code
+            class="bg-gray-100 p-1 rounded">{ 1  2 < }</code> is true, otherwise <code
+            class="bg-gray-100 p-1 rounded">20</code>.
+        </p>
+      </section>
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold">Function Calls and Loops</h2>
+        <p class="mt-2">
+          Define and call functions using the <code class="bg-gray-100 p-1 rounded">def</code> keyword. Loops can be
+          implemented using recursive functions.
+        </p>
+        <p class="mt-2">
+          Example: <code class="bg-gray-100 p-1 rounded">/square { dup * } def</code> defines a function <code
+            class="bg-gray-100 p-1 rounded">square</code> that squares a number. Use it as <code
+            class="bg-gray-100 p-1 rounded">5 square</code>.
+        </p>
+        <p class="mt-2">
+          Example: <code
+            class="bg-gray-100 p-1 rounded">/loop { /i exch def { i 5 < } { i puts i 1 + loop } { } if } def</code>. Use
+          it as <code class="bg-gray-100 p-1 rounded">0 loop</code>.
+        </p>
+      </section>
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold">Stack Operations</h2>
+        <p class="mt-2">
+          Stackl provides various operations to manipulate the stack.
+        </p>
+        <p class="mt-2">
+          Example: <code class="bg-gray-100 p-1 rounded">3 4 exch</code> swaps the top two values, resulting in <code
+            class="bg-gray-100 p-1 rounded">4 3</code>.
+        </p>
+        <p class="mt-2">
+          The <code class="bg-gray-100 p-1 rounded">exch</code> operation can also be used for variable definition by
+          swapping the top two values on the stack. This is useful for assigning values to variables.
+        </p>
+        <p class="mt-2">
+          Example: <code class="bg-gray-100 p-1 rounded">/x exch def</code> assigns the last value pushed to the stack
+          to the variable
+          <code class="bg-gray-100 p-1 rounded">x</code>.
+        </p>
+      </section>
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold">Source Code</h2>
+        <p class="mt-2">
+          Explore the source code on GitHub.
+        </p>
+        <a href="https://github.com/remikeat/stackl" target="_blank"
+          class="mt-2 inline-block px-4 py-2 bg-blue-500 text-white rounded">View on GitHub</a>
       </section>
       <section>
         <h2 class="text-2xl font-semibold">Try it Out</h2>
