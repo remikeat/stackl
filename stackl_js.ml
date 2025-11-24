@@ -48,7 +48,7 @@ let process event =
   | _ -> raise Not_found
 
 let onload _ =
-  let worker = Worker.create "_build/default/worker_js.bc.js" in
+  let worker = Worker.create "_build/default/worker_js.bc.wasm.js" in
   let document = Html.window##.document in
   let samples = Html.getElementById "samples" in
   let btn = Html.getElementById "process" in

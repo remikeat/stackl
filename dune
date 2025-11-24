@@ -17,7 +17,7 @@
  (modules worker_js)
  (preprocess
   (pps js_of_ocaml-ppx))
- (modes byte js)
+ (modes byte js wasm)
  (libraries
   str
   vm
