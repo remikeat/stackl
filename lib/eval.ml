@@ -158,6 +158,7 @@ module MakeEval (G : Drawer.GraphicsInterface) = struct
 
   let rec eval_token level token vm =
     match token with
+    | Comment _ -> vm
     | Operator op -> process_binary_op op vm
     | Block b -> Vm.push (Block b) vm
     | NativeFunc f -> process_native_fun f vm

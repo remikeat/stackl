@@ -3,6 +3,7 @@ open Printf
 type operator = Add | Sub | Mul | Div | Lt
 
 type tree =
+  | Comment of string
   | Value of int
   | FloatValue of float
   | Symbol of string
@@ -17,6 +18,7 @@ let rec sprint_tree tree_lst =
   tree_lst
   |> List.map (fun v ->
          match v with
+         | Comment x -> sprintf "Comment %s" x
          | Value v -> sprintf "Value %i" v
          | FloatValue v -> sprintf "FloatValue %f" v
          | If -> sprintf "if"

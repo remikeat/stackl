@@ -3,6 +3,8 @@ open Tree
 
 exception ParserError of string
 
+let none_of l = satisfy (fun x -> not (List.mem x l))
+
 let rec token_list l input =
   match l with
   | [] -> None
@@ -37,6 +39,9 @@ let symbol_decl = token "/" >> identifier => fun x -> SymbolDecl x
 let if_token = token "if" >> return If
 let def = token "def" >> return Def
 
+let comment = token "#" >> many (none_of ['\n']) => implode >>= fun x ->
+  optional (token "\n") >> return (Comment x)
+
 let native_fun =
   token_list
     [
@@ -59,8 +64,8 @@ let native_fun =
 
 let rec tok input =
   many
-    (block tok
-    => (fun x -> Block x)
+    (comment
+    <|> (block tok => (fun x -> Block x))
     <|> if_token <|> def <|> native_fun <|> symbol_decl <|> float_val
     <|> integer <|> operator <|> symbol)
     input
